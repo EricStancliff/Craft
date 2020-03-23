@@ -185,7 +185,7 @@ void mat_perspective(
 
 void mat_ortho(
     float *matrix,
-    float left, float right, float bottom, float top, float near, float far)
+    float left, float right, float bottom, float top, float nearZ, float farZ)
 {
     matrix[0] = 2 / (right - left);
     matrix[1] = 0;
@@ -197,11 +197,11 @@ void mat_ortho(
     matrix[7] = 0;
     matrix[8] = 0;
     matrix[9] = 0;
-    matrix[10] = -2 / (far - near);
+    matrix[10] = -2 / (farZ - nearZ);
     matrix[11] = 0;
     matrix[12] = -(right + left) / (right - left);
     matrix[13] = -(top + bottom) / (top - bottom);
-    matrix[14] = -(far + near) / (far - near);
+    matrix[14] = -(farZ + nearZ) / (farZ - nearZ);
     matrix[15] = 1;
 }
 

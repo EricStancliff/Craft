@@ -42,15 +42,36 @@ the installation:
 #### Windows
 
 Download and install [CMake](http://www.cmake.org/cmake/resources/software.html)
-and [MinGW](http://www.mingw.org/). Add `C:\MinGW\bin` to your `PATH`.
 
-Download and install [cURL](http://curl.haxx.se/download.html) so that
-CURL/lib and CURL/include are in your Program Files directory.
+In the command prompt (type cmd into the search bar in the bottom left of Windows), 
+cd to folder containing this README.md file and run "cmake ."
 
-Use the following commands in place of the ones described in the next section.
+cd dirname moves you into dirname, cd .. moves you to the parent folder.
 
-    cmake -G "MinGW Makefiles"
-    mingw32-make
+
+Open "craft.sln" in visual studio.
+
+In the solution explorer, right click on glfw solution, under GLFW3.
+Under "configuration properties", in "VC++ Directories", edit
+the include directories to include the path to Craft\deps\glfw\deps
+
+under "configuration properties, in "C/C++", "general", add to"Additional
+Include Directories" Craft\deps\glfw\src
+
+Right click on the Craft Solution, click properties, click "VC++ Directories",
+and add to "Include Directories" Craft\deps\glfw\include and Craft\deps\glfw\deps
+
+Under "Linker" under "Input", in "Additional Dependencies", add glfw3.lib
+and add opengl32.lib.
+
+To use the debugger, go back to Visual Studio, hit Ctrl-Alt-p, select
+craft.exe and set a breakpoint at main.c line 2675.
+
+Build Solution.
+
+On the command line, within the Craft directory, run "Debug\craft.exe"
+
+
 
 ### Compile and Run
 
@@ -62,31 +83,6 @@ terminal.
     cmake .
     make
     ./craft
-
-### Multiplayer
-
-Register for an account!
-
-https://craft.michaelfogleman.com/
-
-#### Client
-
-You can connect to a server with command line arguments...
-
-    ./craft craft.michaelfogleman.com
-
-Or, with the "/online" command in the game itself.
-
-    /online craft.michaelfogleman.com
-
-#### Server
-
-You can run your own server or connect to mine. The server is written in Python
-but requires a compiled DLL so it can perform the terrain generation just like
-the client.
-
-    gcc -std=c99 -O3 -fPIC -shared -o world -I src -I deps/noise deps/noise/noise.c src/world.c
-    python server.py [HOST [PORT]]
 
 ### Controls
 
